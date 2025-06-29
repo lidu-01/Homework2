@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+// define the Book struct
+struct Book {
+    string title;
+    int isbn;
+};
+// function to perform binary search on array
+int binarySearch(Book* books, int size, int targetISBN) {
+    int left = 0, right = size -1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (books[mid].isbn == targetISBN)
+               return mid;
+        else if (books[mid].isbn < targetISBN)
+               left = mid + 1;
+        else
+           right = mid - 1;
+    }
+    return -1;
+int main() {
+    int size = 5;
+    Book* books = new Book[size]{
+        {"The Great Gatsby", 1001},
+        {"1984", 1020},
+        {"To Kill a Mockingbird", 1050},
+        {"Pride and Prejudice", 1080},
+        {"Moby-Dick", 1100}
+    }
+};
+int searchISBN;
+cout << "Enter an ISBN to search for: ";
+cin >> searchISBN;
+
+int index = binarySearch(books, size, searchISBN);
+
+if (index != -1) {
+    cout << "Book found: \"" << books[index].title <<"\" (ISBN: " << books[index].isbn << ")" << endl;
+} else {
+    cout << "Book with ISBN " << searchISBN << " not found." << endl;
+}
+// free the memory
+delete[] books;
+}

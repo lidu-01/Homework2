@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+
+class Item {
+public:
+    virtual void display() = 0; // Pure virtual function
+};
+
+// Derived class: Perishable
+class Perishable : public Item {
+public:
+    void display() override {
+        cout << "Perishable Item" << endl;
+    }
+};
+
+// Derived class: NonPerishable
+class NonPerishable : public Item {
+public:
+    void display() override {
+        cout << "Non-Perishable Item" << endl;
+    }
+};
+
+int main() {
+    // Base class pointer
+    Item* itemPtr;
+
+    // Create Perishable object
+    Perishable perishableItem;
+    itemPtr = &perishableItem;
+    itemPtr->display();  // Calls Perishable::display
+
+    // Create NonPerishable object
+    NonPerishable nonPerishableItem;
+    itemPtr = &nonPerishableItem;
+    itemPtr->display();  // Calls NonPerishable::display
+
+    return 0;
+}
